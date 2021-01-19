@@ -20,7 +20,7 @@ func usingWeapon(usedTimes int, weaponName string) Weapon {
 	standartSword := Weapon{}
 	standartSword.name = "standart"
 	standartSword.damage = 20
-	standartSword.missChacnce = 20
+	standartSword.missChacnce = 0
 	standartSword.numberOfUses = 1
 	standartSword.usedTimes = 0
 

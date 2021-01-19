@@ -8,6 +8,7 @@ type Hero struct {
 	maxHealth int
 	health    int
 	damage    int
+	armor     int
 }
 
 type Dragon struct {
@@ -37,7 +38,7 @@ func main() {
 	crossbow.name = "crossbow"
 	crossbow.damage = 30
 	crossbow.missChacnce = 70
-	crossbow.numberOfUses = 2
+	crossbow.numberOfUses = 3
 	crossbow.usedTimes = 0
 
 	standartSword := Weapon{}
@@ -48,16 +49,18 @@ func main() {
 	standartSword.usedTimes = 0
 
 	hero := Hero{}
-	hero.health = 29
-	hero.damage = 20
 	hero.maxHealth = 100
+	hero.health = 100
+	hero.damage = 20
+	hero.armor = 50
 
 	dragon := Dragon{}
-	dragon.health = 200
-	dragon.damage = 5
-	dragon.missChacnce = 50
+	dragon.health = 100
+	dragon.damage = 20
+	dragon.missChacnce = 0
 
 	var action string
+
 	maxHealth := hero.maxHealth
 	move := 1
 	for hero.health > 0 && dragon.health > 0 {
@@ -90,7 +93,9 @@ func main() {
 			hero.health = heroHeal(hero, dragon, maxHealth)
 
 		}
-		hero.health = dragonAttack(hero, dragon)
+		if dragon.health > 0 {
+			hero.health = dragonAttack(hero, dragon)
+		}
 
 		fmt.Printf("\n\n\n#++++++++++++++++++++++++++++++++++++\n")
 		fmt.Printf("#move: %d\n", move)
