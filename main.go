@@ -49,13 +49,13 @@ func main() {
 	standartSword.usedTimes = 0
 
 	hero := Hero{}
-	hero.maxHealth = 100
+	hero.maxHealth = 20
 	hero.health = 100
 	hero.damage = 20
 	hero.armor = 50
 
 	dragon := Dragon{}
-	dragon.health = 100
+	dragon.health = 2000
 	dragon.damage = 20
 	dragon.missChacnce = 0
 
@@ -90,17 +90,22 @@ func main() {
 
 		default:
 			fmt.Printf("If you will not choose the correct actions, heal will be execute automatically")
-			hero.health = heroHeal(hero, dragon, maxHealth)
+			if hero.armor <= 0 {
+				hero.health = heroHeal(hero, dragon, maxHealth)
+			} else {
+
+			}
 
 		}
 		if dragon.health > 0 {
-			hero.health = dragonAttack(hero, dragon)
+			hero.health, hero.armor = dragonAttack(hero, dragon)
 		}
 
 		fmt.Printf("\n\n\n#++++++++++++++++++++++++++++++++++++\n")
 		fmt.Printf("#move: %d\n", move)
 		fmt.Printf("#Your Hero's health = %d. \n", hero.health)
 		fmt.Printf("#Dragon's health = %d\n", dragon.health)
+		fmt.Printf("Your Hero's armor = %d. \n", hero.armor)
 		fmt.Printf("#++++++++++++++++++++++++++++++++++++\n\n\n")
 
 		if hero.health <= 0 {
