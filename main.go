@@ -5,8 +5,9 @@ import (
 )
 
 type Hero struct {
-	health int
-	damage int
+	maxHealth int
+	health    int
+	damage    int
 }
 
 type Dragon struct {
@@ -47,16 +48,17 @@ func main() {
 	standartSword.usedTimes = 0
 
 	hero := Hero{}
-	hero.health = 100
+	hero.health = 29
 	hero.damage = 20
+	hero.maxHealth = 100
 
 	dragon := Dragon{}
-	dragon.health = 100
-	dragon.damage = 20
+	dragon.health = 200
+	dragon.damage = 5
 	dragon.missChacnce = 50
 
 	var action string
-	maxHealth := hero.health
+	maxHealth := hero.maxHealth
 	move := 1
 	for hero.health > 0 && dragon.health > 0 {
 		fmt.Printf("Choose the next action: ")
@@ -64,10 +66,27 @@ func main() {
 		switch action {
 		case "attack":
 			fmt.Printf("If you want to use weapon, enter it's name: ")
-			weapon := usingWeapon(pan.usedTimes)
-			dragon.health = heroAttack(hero, dragon, weapon)
-			pan.usedTimes++
+			var weaponName string
+			fmt.Scanf("%s", &weaponName)
+			if weaponName == "pan" {
+				weapon := usingWeapon(pan.usedTimes, pan.name)
+				dragon.health = heroAttack(hero, dragon, weapon)
+				pan.usedTimes++
+			} else if weaponName == "crossbow" {
+				weapon := usingWeapon(crossbow.usedTimes, crossbow.name)
+				dragon.health = heroAttack(hero, dragon, weapon)
+
+				crossbow.usedTimes++
+				fmt.Println(crossbow.usedTimes)
+			} else {
+				weapon := usingWeapon(standartSword.usedTimes, standartSword.name) //можно не вызывать. Хочу, чтобы default выполнился. Я сним час мучился. Надо же себя утещить
+				dragon.health = heroAttack(hero, dragon, weapon)
+			}
 		case "heal":
+			hero.health = heroHeal(hero, dragon, maxHealth)
+
+		default:
+			fmt.Printf("If you will not choose the correct actions, heal will be execute automatically")
 			hero.health = heroHeal(hero, dragon, maxHealth)
 
 		}

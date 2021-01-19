@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func usingWeapon(usedTimes int) Weapon {
+func usingWeapon(usedTimes int, weaponName string) Weapon {
 	pan := Weapon{}
 	pan.name = "pan"
 	pan.damage = 10
@@ -13,40 +13,40 @@ func usingWeapon(usedTimes int) Weapon {
 	crossbow := Weapon{}
 	crossbow.name = "crossbow"
 	crossbow.damage = 30
-	crossbow.missChacnce = 40
+	crossbow.missChacnce = 10
 	crossbow.numberOfUses = 2
 	crossbow.usedTimes = 0
 
 	standartSword := Weapon{}
 	standartSword.name = "standart"
 	standartSword.damage = 20
-	standartSword.missChacnce = 50
+	standartSword.missChacnce = 20
 	standartSword.numberOfUses = 1
 	standartSword.usedTimes = 0
 
-	var weaponToUse string
 	var weapon Weapon
-	fmt.Scanf("%s", &weaponToUse)
-	switch weaponToUse {
+	switch weaponName {
 	case "pan":
-
 		if usedTimes < pan.numberOfUses {
 			weapon = pan
+
 		} else {
-			fmt.Printf("you have reached the limit for this weapon(%d), used default weapon \n(to disable the limits on weapons, you can activate the service 'endless ammunition')\n",
+			fmt.Printf("you have reached the limit for this weapon(%d), used default weapon \n(to disable the limits on weapons, you can activate the service 'endless ammunition'for 1,99$)\n",
 				weapon.usedTimes)
 			weapon = standartSword
 		}
 	case "crossbow":
-		if crossbow.usedTimes < crossbow.numberOfUses {
+		if usedTimes < crossbow.numberOfUses {
 			weapon = crossbow
-
 		} else {
-			fmt.Printf("you have reached the limit for this weapon(%d), please choose another \n(to disable the limits on weapons, you can activate the service 'endless ammunition')\n",
+			fmt.Printf("you have reached the limit for this weapon(%d), used default weapon \n(to disable the limits on weapons, you can activate the service 'endless ammunition'for 1,99$)\n",
 				weapon.usedTimes)
+			weapon = standartSword
 		}
 	default:
 		weapon = standartSword
+		fmt.Printf("Used default weapon\n")
 	}
+
 	return weapon
 }
