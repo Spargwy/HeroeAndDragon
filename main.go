@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 )
 
 type Hero struct {
@@ -12,54 +10,50 @@ type Hero struct {
 }
 
 type Dragon struct {
-	health int
-	damage int
+	health      int
+	damage      int
+	missChacnce int
 }
 
-func heroattack(hero Hero, dragon Dragon) int {
-	rand.Seed(time.Now().UnixNano())
-	chance := rand.Intn(100)
-	if chance <= 50 {
-		dragon.health = dragon.health - hero.damage
-	} else {
-		fmt.Printf("You missed with chance %d!\n", chance)
-	}
-	return dragon.health
-}
-
-func dragonAttack(hero Hero, dragon Dragon) int {
-	rand.Seed(time.Now().UnixNano())
-	chance := rand.Intn(100)
-	if chance <= 40 {
-		hero.health = hero.health - dragon.damage
-	} else {
-		fmt.Printf("Dragon missed with chance %d!\n", chance)
-	}
-	return hero.health
-}
-
-func heroHeal(hero Hero, dragon Dragon, maxHealth int) int {
-	health := hero.health
-	if health <= maxHealth-20 {
-		health = health + 20
-		fmt.Printf("You healed your hero to 20 HP\n")
-
-	} else {
-		fmt.Printf("Sorry, but you cant heal you hero, because HP is max. You automatically attack the dragon\n")
-		dragonAttack(hero, dragon)
-	}
-	return health
-
+type Weapon struct {
+	name         string
+	damage       int
+	numberOfUses int
+	missChacnce  int
+	usedTimes    int
 }
 
 func main() {
+
+	pan := Weapon{}
+	pan.name = "pan"
+	pan.damage = 10
+	pan.missChacnce = 0
+	pan.numberOfUses = 2
+	pan.usedTimes = 0
+
+	crossbow := Weapon{}
+	crossbow.name = "crossbow"
+	crossbow.damage = 30
+	crossbow.missChacnce = 70
+	crossbow.numberOfUses = 2
+	crossbow.usedTimes = 0
+
+	standartSword := Weapon{}
+	standartSword.name = "standart"
+	standartSword.damage = 20
+	standartSword.missChacnce = 50
+	standartSword.numberOfUses = 1
+	standartSword.usedTimes = 0
+
 	hero := Hero{}
-	hero.health = 20
+	hero.health = 100
 	hero.damage = 20
 
 	dragon := Dragon{}
-	dragon.health = 20
+	dragon.health = 100
 	dragon.damage = 20
+	dragon.missChacnce = 50
 
 	var action string
 	maxHealth := hero.health
@@ -69,25 +63,28 @@ func main() {
 		fmt.Scanf("%s", &action)
 		switch action {
 		case "attack":
-			dragon.health = heroattack(hero, dragon)
+			fmt.Printf("If you want to use weapon, enter it's name: ")
+			weapon := usingWeapon(pan.usedTimes)
+			dragon.health = heroAttack(hero, dragon, weapon)
+			pan.usedTimes++
 		case "heal":
 			hero.health = heroHeal(hero, dragon, maxHealth)
 
 		}
-		if dragon.health > 0 {
-			hero.health = dragonAttack(hero, dragon)
-		}
-		fmt.Printf("#++++++++++++++++++++++++++++++++++++\n")
+		hero.health = dragonAttack(hero, dragon)
+
+		fmt.Printf("\n\n\n#++++++++++++++++++++++++++++++++++++\n")
 		fmt.Printf("#move: %d\n", move)
 		fmt.Printf("#Your Hero's health = %d. \n", hero.health)
 		fmt.Printf("#Dragon's health = %d\n", dragon.health)
-		fmt.Printf("#++++++++++++++++++++++++++++++++++++\n")
+		fmt.Printf("#++++++++++++++++++++++++++++++++++++\n\n\n")
 
 		if hero.health <= 0 {
 			fmt.Printf("Dragon win! The battle lasted %d moves!\n", move)
 		} else if dragon.health <= 0 {
 			fmt.Printf("Hero win! The battle lasted %d moves!\n", move)
 		}
+
 		move++
 
 	}
