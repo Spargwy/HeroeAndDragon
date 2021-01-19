@@ -43,7 +43,7 @@ func main() {
 
 	standartSword := Weapon{}
 	standartSword.name = "standart"
-	standartSword.damage = 20
+	standartSword.damage = 15
 	standartSword.missChacnce = 50
 	standartSword.numberOfUses = 1
 	standartSword.usedTimes = 0
@@ -72,19 +72,20 @@ func main() {
 			var weaponName string
 			fmt.Scanf("%s", &weaponName)
 			if weaponName == "pan" {
-				weapon := usingWeapon(pan.usedTimes, pan.name)
-				dragon.health = heroAttack(hero, dragon, weapon)
+				weapon := usingWeapon(pan.usedTimes, pan.name, pan.damage)
+				dragon.health, pan.damage = heroAttack(hero, dragon, weapon)
 				pan.usedTimes++
 			} else if weaponName == "crossbow" {
-				weapon := usingWeapon(crossbow.usedTimes, crossbow.name)
-				dragon.health = heroAttack(hero, dragon, weapon)
+				weapon := usingWeapon(crossbow.usedTimes, crossbow.name, crossbow.damage)
+				dragon.health, crossbow.damage = heroAttack(hero, dragon, weapon)
 
 				crossbow.usedTimes++
 				fmt.Println(crossbow.usedTimes)
 			} else {
-				weapon := usingWeapon(standartSword.usedTimes, standartSword.name) //можно не вызывать. Хочу, чтобы default выполнился. Я сним час мучился. Надо же себя утещить
-				dragon.health = heroAttack(hero, dragon, weapon)
+				weapon := usingWeapon(standartSword.usedTimes, standartSword.name, standartSword.damage) //можно не вызывать. Хочу, чтобы default выполнился. Я сним час мучился. Надо же себя утещить
+				dragon.health, standartSword.damage = heroAttack(hero, dragon, weapon)
 			}
+
 		case "heal":
 			hero.health = heroHeal(hero, dragon, maxHealth)
 
