@@ -4,7 +4,7 @@ import "fmt"
 
 func heroHeal(hero Hero, dragon Dragon, maxHealth int) int {
 	health := hero.health
-	fmt.Println("HEEEEEEEEEEEEEEEEEEEEEEEEEEEY", health)
+	fmt.Println(health)
 	fmt.Println(health)
 	if health <= maxHealth-20 {
 		health = health + 20
