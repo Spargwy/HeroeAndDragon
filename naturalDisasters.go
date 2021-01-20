@@ -13,8 +13,7 @@ func naturalDisasters(dragon Dragon, hero Hero) (int, int) {
 	if chance <= 5 {
 		fmt.Println("Похолодание сказалось на драконе...\n")
 		dragon.health = dragon.health - dragon.health/10*2
-	} else if chance > 5 && chance <= 10 {
-		fmt.Println("В доспехах жарко вообще-то!\n")
+	} else if chance > 5 && chance <= 90 {
 		hero.health = hero.health - hero.health/10*2
 	} else if chance > 10 && chance <= 30 {
 		fmt.Println("Дракон назвал рыцаря живодером, из-за чего тот окончательно пригорюнился. Дракон этот шанс, конечно не упустил\n")

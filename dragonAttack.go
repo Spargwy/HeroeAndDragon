@@ -15,8 +15,7 @@ func dragonAttack(hero Hero, dragon Dragon) (int, int) {
 		} else if hero.armor-dragon.damage < 0 {
 			hero.health = hero.health - (dragon.damage - hero.armor)
 			hero.armor = 0
-			//hero.health = hero.health - (dragon.damage + hero.armor*-1)
-			//hero.armor = hero.armor*-1 + hero.armor
+
 		} else {
 			hero.health = hero.health - dragon.damage
 		}
