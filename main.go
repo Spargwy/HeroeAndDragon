@@ -12,17 +12,17 @@ type Hero struct {
 }
 
 type Dragon struct {
-	maxHealth   int
-	health      int
-	damage      int
-	missChacnce int
+	maxHealth  int
+	health     int
+	damage     int
+	missChance int
 }
 
 type Weapon struct {
 	name         string
 	damage       int
 	numberOfUses int
-	missChacnce  int
+	missChance   int
 	usedTimes    int
 }
 
@@ -31,21 +31,21 @@ func main() {
 	pan := Weapon{}
 	pan.name = "pan"
 	pan.damage = 10
-	pan.missChacnce = 0
+	pan.missChance = 0
 	pan.numberOfUses = 999
 	pan.usedTimes = 0
 
 	crossbow := Weapon{}
 	crossbow.name = "crossbow"
 	crossbow.damage = 30
-	crossbow.missChacnce = 20
+	crossbow.missChance = 20
 	crossbow.numberOfUses = 5
 	crossbow.usedTimes = 0
 
 	standartSword := Weapon{}
 	standartSword.name = "standart"
 	standartSword.damage = 15
-	standartSword.missChacnce = 10
+	standartSword.missChance = 20
 	standartSword.numberOfUses = 1
 	standartSword.usedTimes = 0
 
@@ -57,7 +57,7 @@ func main() {
 	dragon := Dragon{}
 	dragon.health = 1000
 	dragon.damage = 50
-	dragon.missChacnce = 80
+	dragon.missChance = 80
 	dragon.maxHealth = 1000
 
 	var action string

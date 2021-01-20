@@ -6,21 +6,21 @@ func usingWeapon(usedTimes int, weaponName string, weaponDamage int) Weapon {
 	pan := Weapon{}
 	pan.name = "pan"
 	pan.damage = 10
-	pan.missChacnce = 0
+	pan.missChance = 0
 	pan.numberOfUses = 2
 	pan.usedTimes = 0
 
 	crossbow := Weapon{}
 	crossbow.name = "crossbow"
 	crossbow.damage = 30
-	crossbow.missChacnce = 10
+	crossbow.missChance = 10
 	crossbow.numberOfUses = 2
 	crossbow.usedTimes = 0
 
 	standartSword := Weapon{}
 	standartSword.name = "standart"
 	standartSword.damage = 10
-	standartSword.missChacnce = 0
+	standartSword.missChance = 0
 	standartSword.numberOfUses = 1
 	standartSword.usedTimes = 0
 
@@ -51,7 +51,6 @@ func usingWeapon(usedTimes int, weaponName string, weaponDamage int) Weapon {
 		weapon = standartSword
 		weapon.damage = weaponDamage
 		fmt.Printf("Used default weapon\n")
-		fmt.Printf("%d hhhhhhhhhhhh\n\n\n", weapon.damage)
 
 	}
 

@@ -9,7 +9,7 @@ import (
 func dragonAttack(hero Hero, dragon Dragon) (int, int) {
 	rand.Seed(time.Now().UnixNano())
 	chance := rand.Intn(100)
-	if chance <= 100-dragon.missChacnce {
+	if chance <= 100-dragon.missChance {
 		if hero.armor > 0 && (hero.armor-dragon.damage) > 0 {
 			hero.armor = hero.armor - dragon.damage
 		} else if hero.armor-dragon.damage < 0 {
