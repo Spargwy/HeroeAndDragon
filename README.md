@@ -7,6 +7,11 @@ git clone git@github.com:Spargwy/HeroeAndDragon.git
 Для работы проекта необходимо иметь установленный компилятор языка golang. Скачать его можно по следующей инструкции https://golang.org/doc/install.
 После установки необходимых компонентов вы должны перейти в папку в которой находиться файл main.go и ввести команду:
 
-go run *.go
+go build 
+
+затем
+
+go run HeroAndDragon или ./HeroAndDragon
+
 
 Поздравляю! Игра запущена.
