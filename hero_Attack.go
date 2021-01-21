@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-//строится на основе weapon
 func heroAttack(hero Hero, dragon Dragon, weapon Weapon) int {
 	damageReduction := heroTiredness(hero)
 	if weapon.minDamage > weapon.damage-damageReduction {
