@@ -1,125 +1,39 @@
 package main
 
-import (
-	"fmt"
-)
-
 type Hero struct {
 	maxHealth int
 	health    int
 	damage    int
-	armor     int
 }
 
 type Dragon struct {
-	maxHealth  int
-	health     int
-	damage     int
-	missChance int
+	health int
+	damage int
 }
 
-type Weapon struct {
-	name         string
-	damage       int
-	numberOfUses int
-	missChance   int
-	usedTimes    int
-}
+var crossbowItemUsed int // переменные использующиеся как счетчик использования оружия
+var panItemUsed int
 
 func main() {
-
-	pan := Weapon{}
-	pan.name = "pan"
-	pan.damage = 10
-	pan.missChance = 0
-	pan.numberOfUses = 999
-	pan.usedTimes = 0
-
-	crossbow := Weapon{}
-	crossbow.name = "crossbow"
-	crossbow.damage = 30
-	crossbow.missChance = 20
-	crossbow.numberOfUses = 5
-	crossbow.usedTimes = 0
-
-	standartSword := Weapon{}
-	standartSword.name = "standart"
-	standartSword.damage = 15
-	standartSword.missChance = 20
-	standartSword.numberOfUses = 1
-	standartSword.usedTimes = 0
-
 	hero := Hero{}
 	hero.maxHealth = 100
-	hero.health = 100
-	hero.armor = 50
+	hero.health = 40
+	hero.damage = 20
 
 	dragon := Dragon{}
 	dragon.health = 1000
-	dragon.damage = 50
-	dragon.missChance = 80
-	dragon.maxHealth = 1000
-
-	var action string
+	dragon.damage = 5
 
 	maxHealth := hero.maxHealth
 	move := 1
 	for hero.health > 0 && dragon.health > 0 {
-		dragon.health, hero.health = naturalDisasters(dragon, hero)
-		if dragon.health > 0 && hero.health > 0 {
-			fmt.Printf("Choose the next action: ")
-			fmt.Scanf("%s", &action)
-			switch action {
-			case "attack":
-				fmt.Printf("If you want to use weapon, enter it's name: ")
-				var weaponName string
-				fmt.Scanf("%s", &weaponName)
-				if weaponName == "pan" {
-					weapon := usingWeapon(pan.usedTimes, pan.name, pan.damage)
-					dragon.health, pan.damage = heroAttack(hero, dragon, weapon)
-					pan.usedTimes++
-				} else if weaponName == "crossbow" {
-					weapon := usingWeapon(crossbow.usedTimes, crossbow.name, crossbow.damage)
-					dragon.health, crossbow.damage = heroAttack(hero, dragon, weapon)
-
-					crossbow.usedTimes++
-					fmt.Println(crossbow.usedTimes)
-				} else {
-					weapon := usingWeapon(standartSword.usedTimes, standartSword.name, standartSword.damage) //можно не вызывать. Хочу, чтобы default выполнился. Я сним час мучился. Надо же себя утещить
-					dragon.health, standartSword.damage = heroAttack(hero, dragon, weapon)
-				}
-
-			case "heal":
-				hero.health = heroHeal(hero, dragon, maxHealth)
-
-			default:
-				fmt.Printf("If you will not choose the correct actions, heal will be execute automatically")
-				if hero.armor <= 0 {
-					hero.health = heroHeal(hero, dragon, maxHealth)
-				} else {
-
-				}
-
-			}
-			if dragon.health > 0 {
-				hero.health, hero.armor = dragonAttack(hero, dragon)
-			}
-			comments(hero, dragon)
-			fmt.Printf("\n\n\n#++++++++++++++++++++++++++++++++++++\n")
-			fmt.Printf("#move: %d\n", move)
-			fmt.Printf("#Your Hero's health = %d. \n", hero.health)
-			fmt.Printf("#Dragon's health = %d\n", dragon.health)
-			fmt.Printf("Your Hero's armor = %d. \n", hero.armor)
-			fmt.Printf("#++++++++++++++++++++++++++++++++++++\n\n\n")
-
-			if hero.health <= 0 {
-				fmt.Printf("Dragon win! The battle lasted %d moves!\n", move)
-			} else if dragon.health <= 0 {
-				fmt.Printf("Hero win! The battle lasted %d moves!\n", move)
-			}
-
-			move++
-
+		hero, dragon = chooseAction(hero, dragon, maxHealth)
+		if dragon.health > 0 {
+			hero.health = dragonAttack(hero, dragon)
 		}
+		outputMessage(move, hero.health, dragon.health)
+		move++
+
 	}
+
 }
