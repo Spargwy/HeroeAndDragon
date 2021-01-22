@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -9,6 +10,7 @@ func TestHeroAttack(t *testing.T) {
 	hero.maxHealth = 100
 	hero.health = 100
 	hero.damage = 100
+	fmt.Println(hero.health)
 
 	dragon := Dragon{}
 	dragon.health = 1000
