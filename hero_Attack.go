@@ -30,6 +30,5 @@ func heroAttack(hero Hero, dragon Dragon, weapon Weapon, chanceIsGood bool) int 
 		dragon.health = dragon.health - hero.damage
 	}
 
-	fmt.Println(hero.damage)
 	return dragon.health
 }
