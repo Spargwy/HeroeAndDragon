@@ -11,7 +11,7 @@ git clone git@github.com:Spargwy/HeroeAndDragon.git
 
 затем
 
-```go run HeroAndDragon``` или ```./HeroAndDragon```
+```./HeroAndDragon```
 
 
 Поздравляю! Игра запущена.
