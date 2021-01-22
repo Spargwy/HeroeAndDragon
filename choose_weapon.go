@@ -12,7 +12,20 @@ type Weapon struct {
 }
 
 //принимать параметры сложности
-func usingWeapon() Weapon {
+
+func chooseWeapon() string {
+	var choosedWeapon string
+	fmt.Print("If you want to use weapon, you can put number of it's weapon\n")
+	fmt.Printf("%s: 1\n", "crossbow")
+	fmt.Printf("%s: 2\n", "pan")
+	fmt.Printf("weapon: ")
+
+	fmt.Scan(&choosedWeapon)
+
+	return choosedWeapon
+}
+
+func usingWeapon(choosedWeapon string) Weapon {
 	crossbow := Weapon{}
 	crossbow.name = "crossbow"
 	crossbow.damage = 30
@@ -35,16 +48,9 @@ func usingWeapon() Weapon {
 	sword.numberOfUsing = 1
 	sword.ItemUsed = 0
 
-	var WeaponChoose string
 	var weapon Weapon
-	fmt.Print("If you want to use weapon, you can put number of it's weapon\n")
-	fmt.Printf("%s: 1\n", crossbow.name)
-	fmt.Printf("%s: 2\n", pan.name)
-	fmt.Printf("weapon: ")
 
-	fmt.Scan(&WeaponChoose)
-
-	switch WeaponChoose {
+	switch choosedWeapon {
 	case "1":
 		if crossbowItemUsed < crossbow.numberOfUsing {
 			weapon = crossbow

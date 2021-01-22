@@ -6,13 +6,21 @@ import (
 	"time"
 )
 
-func dragonAttack(hero Hero, dragon Dragon) int {
+func dragonChanceToAttack(dragonMissChance int) bool {
+	var chanceIsGood bool
 	rand.Seed(time.Now().UnixNano())
 	chance := rand.Intn(100)
-	if chance <= 50 {
-		hero.health = hero.health - dragon.damage
+	if chance >= 100-dragonMissChance {
+		fmt.Printf("Dragon missed with chance %d!\n", chance)
 	} else {
-		fmt.Printf("Dragon missed with chance %d!", chance)
+		chanceIsGood = true
+	}
+
+	return chanceIsGood
+}
+func dragonAttack(hero Hero, dragon Dragon, chanceIsGood bool) int {
+	if chanceIsGood == true {
+		hero.health = hero.health - dragon.damage
 	}
 	return hero.health
 

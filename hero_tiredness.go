@@ -1,8 +1,11 @@
 package main
 
+import "fmt"
+
 func heroTiredness(hero Hero) int {
-	var damageReduction int
+	damageReduction := 0
 	if hero.health <= (hero.maxHealth/100*30) && hero.health > hero.maxHealth/100*20 {
+		fmt.Println(hero.maxHealth / 100 * 30)
 		damageReduction = 5
 	} else if hero.health <= hero.maxHealth/100*20 && hero.health > hero.maxHealth/100*10 {
 		damageReduction = 10
