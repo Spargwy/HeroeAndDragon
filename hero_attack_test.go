@@ -6,37 +6,23 @@ import (
 )
 
 func TestHeroAttack(t *testing.T) {
-	hero := Hero{}
-	hero.maxHealth = 100
-	hero.health = 100
-	hero.damage = 100
-	fmt.Println(hero.health)
-
-	dragon := Dragon{}
-	dragon.health = 1000
-	dragon.damage = 5
-
-	crossbow := Weapon{}
-	crossbow.name = "crossbow"
-	crossbow.damage = 30
-	crossbow.minDamage = 15
-	crossbow.missChance = 0
-	crossbow.numberOfUsing = 100
-	crossbow.ItemUsed = 0
-
-	pan := Weapon{}
-	pan.name = "pan"
-	pan.damage = 10
-	pan.missChance = 100
-	pan.numberOfUsing = 10
-	pan.ItemUsed = 0
-
-	sword := Weapon{}
-	sword.name = "sword"
-	sword.damage = 30
-	sword.missChance = 0
-	sword.numberOfUsing = 1
-	sword.ItemUsed = 0
+	hero := Hero{
+		maxHealth: 100,
+		health:    100,
+		damage:    100,
+	}
+	dragon := Dragon{
+		health: 1000,
+		damage: 5,
+	}
+	crossbow := Weapon{
+		name:          "crossbow",
+		damage:        30,
+		minDamage:     15,
+		missChance:    20,
+		numberOfUsing: 100,
+		ItemUsed:      0,
+	}
 
 	damageReduction := heroTiredness(hero)
 	returnedDragonHealth := heroAttack(hero, dragon, crossbow, true)
@@ -65,4 +51,6 @@ func TestHeroAttack(t *testing.T) {
 	if returnedDragonHealth != wantDragonHealth {
 		t.Fatalf("ERROR! Dragon's health must be equal %d, but equal %d. WEAPON %s, %d, %d", wantDragonHealth, returnedDragonHealth, crossbow.name, crossbow.damage, crossbow.missChance)
 	}
+	fmt.Print("OK\n")
+
 }

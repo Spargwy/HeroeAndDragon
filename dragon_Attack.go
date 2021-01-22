@@ -3,23 +3,23 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 )
 
-func dragonChanceToAttack(dragonMissChance int) bool {
-	var chanceIsGood bool
-	rand.Seed(time.Now().UnixNano())
+func dragonSuccessfullyAttack(daragonMissChance, seed int) bool {
+	var successfulAttack bool
+	rand.Seed(int64(seed))
 	chance := rand.Intn(100)
-	if chance >= 100-dragonMissChance {
-		fmt.Printf("Dragon missed with chance %d!\n", chance)
+	fmt.Println(chance)
+	if chance >= 100-daragonMissChance {
+		fmt.Printf("Dragon missed with chance%d!\n", chance)
 	} else {
-		chanceIsGood = true
+		fmt.Printf("Dragon attack with chance %d!\n", chance)
+		successfulAttack = true
 	}
-
-	return chanceIsGood
+	return successfulAttack
 }
-func dragonAttack(hero Hero, dragon Dragon, chanceIsGood bool) int {
-	if chanceIsGood == true {
+func dragonAttack(hero Hero, dragon Dragon, successfulAttack bool) int {
+	if successfulAttack == true {
 		hero.health = hero.health - dragon.damage
 	}
 	return hero.health

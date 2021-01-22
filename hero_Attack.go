@@ -3,20 +3,19 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 )
 
-func heroChanceToAttack(weaponMissChance int) bool {
-	var chanceIsGood bool
-	rand.Seed(time.Now().UnixNano())
+func heroChanceToAttack(weaponMissChance int, seed int) bool {
+	var successfulAttack bool
+	rand.Seed(int64(seed))
 	chance := rand.Intn(100)
-	if chance >= 100-weaponMissChance {
+	if chance > 100-weaponMissChance {
 		fmt.Printf("You missed with chance %d!\n", chance)
 	} else {
-		chanceIsGood = true
+		successfulAttack = true
 	}
 
-	return chanceIsGood
+	return successfulAttack
 }
 
 func heroAttack(hero Hero, dragon Dragon, weapon Weapon, chanceIsGood bool) int {
