@@ -12,6 +12,7 @@ func chooseAction(hero Hero, dragon Dragon, maxHealth int) (Hero, Dragon) {
 	case "1":
 		chooseWeapon := chooseWeapon()
 		weapon := usingWeapon(chooseWeapon)
+		fmt.Printf("WEAPON: %s, %d, %d\n", weapon.name, weapon.damage, weapon.missChance)
 		chanceToAttack := heroChanceToAttack(weapon.missChance)
 		dragon.health = heroAttack(hero, dragon, weapon, chanceToAttack)
 	case "2":
