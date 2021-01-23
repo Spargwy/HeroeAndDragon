@@ -2,13 +2,10 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 )
 
-func heroChanceToAttack(weaponMissChance int, seed int) bool {
+func heroChanceToAttack(weaponMissChance int, chance int) bool {
 	var successfulAttack bool
-	rand.Seed(int64(seed))
-	chance := rand.Intn(100)
 	if chance > 100-weaponMissChance {
 		fmt.Printf("You missed with chance %d!\n", chance)
 	} else {

@@ -18,8 +18,8 @@ func chooseAction(hero Hero, dragon Dragon, maxHealth int, action string) (Hero,
 	case "1":
 		chooseWeapon := chooseWeapon()
 		weapon := usingWeapon(chooseWeapon)
-		seed := randomSeed()
-		chanceToAttack := heroChanceToAttack(weapon.missChance, seed)
+		chance := chanceToAttack()
+		chanceToAttack := heroChanceToAttack(weapon.missChance, chance)
 		dragon.health = heroAttack(hero, dragon, weapon, chanceToAttack)
 	case "2":
 		fmt.Println(hero.health, maxHealth)

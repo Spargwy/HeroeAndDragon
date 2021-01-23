@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func TestrandomSeed(t *testing.T) {
-	seed := randomSeed()
-	if seed > -1 && seed < 101 {
+func TestChance(t *testing.T) {
+	chance := chanceToAttack()
+	if chance > -1 && chance < 101 {
 		fmt.Print("OK")
 	} else {
 		t.Fail()

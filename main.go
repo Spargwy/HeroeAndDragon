@@ -32,8 +32,8 @@ func main() {
 		action := askAboutnextAction()
 		hero, dragon = chooseAction(hero, dragon, maxHealth, action)
 		if dragon.health > 0 {
-			seed := randomSeed()
-			chanceIsGood := dragonSuccessfullyAttack(dragon.missChance, seed)
+			chance := chanceToAttack()
+			chanceIsGood := dragonSuccessfullyAttack(dragon.missChance, chance)
 			hero.health = dragonAttack(hero, dragon, chanceIsGood)
 		}
 		outputMessage(move, hero.health, dragon.health)

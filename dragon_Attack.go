@@ -2,14 +2,10 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 )
 
-func dragonSuccessfullyAttack(daragonMissChance, seed int) bool {
+func dragonSuccessfullyAttack(daragonMissChance, chance int) bool {
 	var successfulAttack bool
-	rand.Seed(int64(seed))
-	chance := rand.Intn(100)
-	fmt.Println(chance)
 	if chance >= 100-daragonMissChance {
 		fmt.Printf("Dragon missed with chance%d!\n", chance)
 	} else {
