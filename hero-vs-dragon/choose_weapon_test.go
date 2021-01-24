@@ -19,7 +19,7 @@ func TestUsingWeapon(t *testing.T) {
 		damage:        10,
 		missChance:    0,
 		numberOfUsing: 10,
-		ItemUsed:      0,
+		ItemUsed:      9,
 	}
 	sword := Weapon{
 		name:          "sword",
@@ -32,16 +32,16 @@ func TestUsingWeapon(t *testing.T) {
 	wantPanName := pan.name
 	wantSwordName := sword.name
 
-	weapon := usingWeapon("1")
+	weapon, crossbow, pan := usingWeapon(crossbow, pan, sword, "1")
 	if weapon.name != wantCrossbowName {
 		t.Fatalf("Return weapon struct is incorrect!!! Returned %s, but most %s", weapon.name, wantCrossbowName)
 	}
-	weapon = usingWeapon("2")
+	weapon, crossbow, pan = usingWeapon(crossbow, pan, sword, "2")
 	if weapon.name != wantPanName {
 		t.Fatalf("Return weapon struct is incorrect!!! Returned %s, but most %s", weapon.name, wantPanName)
 	}
 
-	weapon = usingWeapon("3")
+	weapon, crossbow, pan = usingWeapon(crossbow, pan, sword, "3")
 	if weapon.name != wantSwordName {
 		t.Fatalf("Return weapon struct is incorrect!!! Returned %s, but most %s", weapon.name, wantSwordName)
 	}

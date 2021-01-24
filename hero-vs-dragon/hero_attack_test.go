@@ -24,29 +24,44 @@ func TestHeroAttack(t *testing.T) {
 		ItemUsed:      0,
 	}
 
+	pan := Weapon{
+		name:          "pan",
+		damage:        10,
+		missChance:    0,
+		numberOfUsing: 10,
+		ItemUsed:      0,
+	}
+	sword := Weapon{
+		name:          "sword",
+		damage:        30,
+		missChance:    20,
+		numberOfUsing: 1,
+		ItemUsed:      0,
+	}
+
 	damageReduction := heroTiredness(hero)
-	returnedDragonHealth := heroAttack(hero, dragon, crossbow, true)
+	returnedDragonHealth, _, _, _, _ := heroAttack(hero, dragon, crossbow, pan, sword, crossbow, true)
 	wantDragonHealth := dragon.health - (crossbow.damage - damageReduction)
 	if returnedDragonHealth != wantDragonHealth {
 		t.Fatalf("ERROR! Dragon's health must be equal %d, but equal %d", wantDragonHealth, returnedDragonHealth)
 	}
 	hero.health = hero.health - 70
 	damageReduction = heroTiredness(hero)
-	returnedDragonHealth = heroAttack(hero, dragon, crossbow, true)
+	returnedDragonHealth, _, _, _, _ = heroAttack(hero, dragon, crossbow, pan, sword, crossbow, true)
 	wantDragonHealth = dragon.health - (crossbow.damage - damageReduction)
 	if returnedDragonHealth != wantDragonHealth {
 		t.Fatalf("ERROR! Dragon's health must be equal %d, but equal %d. WEAPON %s, %d, %d", wantDragonHealth, returnedDragonHealth, crossbow.name, crossbow.damage, crossbow.missChance)
 	}
 	hero.health = hero.health - 10
 	damageReduction = heroTiredness(hero)
-	returnedDragonHealth = heroAttack(hero, dragon, crossbow, true)
+	returnedDragonHealth, _, _, _, _ = heroAttack(hero, dragon, crossbow, pan, sword, crossbow, true)
 	wantDragonHealth = dragon.health - (crossbow.damage - damageReduction)
 	if returnedDragonHealth != wantDragonHealth {
 		t.Fatalf("ERROR! Dragon's health must be equal %d, but equal %d. WEAPON %s, %d, %d", wantDragonHealth, returnedDragonHealth, crossbow.name, crossbow.damage, crossbow.missChance)
 	}
 	hero.health = hero.health - 10
 	damageReduction = heroTiredness(hero)
-	returnedDragonHealth = heroAttack(hero, dragon, crossbow, true)
+	returnedDragonHealth, _, _, _, _ = heroAttack(hero, dragon, crossbow, pan, sword, crossbow, true)
 	wantDragonHealth = dragon.health - crossbow.minDamage
 	if returnedDragonHealth != wantDragonHealth {
 		t.Fatalf("ERROR! Dragon's health must be equal %d, but equal %d. WEAPON %s, %d, %d", wantDragonHealth, returnedDragonHealth, crossbow.name, crossbow.damage, crossbow.missChance)
