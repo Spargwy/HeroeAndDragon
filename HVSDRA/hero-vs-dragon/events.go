@@ -23,7 +23,7 @@ func events(dragon Dragon, hero Hero, chance int) (Hero, Dragon) {
 		}
 
 	} else if chance > 10 && chance <= 15 {
-		fmt.Print("You told the dragon that no one loves him. The dragon's health has decreased by 50 percent and if you have smaller than 10hp, reduce = 4.")
+		fmt.Print("You told the dragon that no one loves him. The dragon's health has decreased by 50 percent and if dragon hase smaller than 10hp, reduce = 4.")
 		fmt.Print("\nAll is fair in war, but this is too much...\n")
 		if dragon.health > 10 {
 			dragon.health = dragon.health - dragon.health/10*5

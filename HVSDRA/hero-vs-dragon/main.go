@@ -18,19 +18,19 @@ type Dragon struct {
 func main() {
 	hero := Hero{
 		maxHealth: 1000,
-		health:    1000,
+		health:    100,
 		damage:    20,
 		armor:     50,
 	}
 	dragon := Dragon{
 		health:     1000,
-		damage:     5,
-		missChance: 0,
+		damage:     40,
+		missChance: 30,
 	}
 	crossbow := Weapon{
 		name:          "crossbow",
 		damage:        30,
-		minDamage:     15,
+		minDamage:     0,
 		missChance:    20,
 		numberOfUsing: 100,
 		ItemUsed:      0,
@@ -44,7 +44,7 @@ func main() {
 	}
 	sword := Weapon{
 		name:          "sword",
-		damage:        30,
+		damage:        15,
 		missChance:    20,
 		numberOfUsing: 1,
 		ItemUsed:      0,
@@ -60,7 +60,7 @@ func main() {
 			hero.health, hero.armor = dragonAttack(hero, dragon, chanceIsGood)
 		}
 		fmt.Println(crossbow)
-		outputMessage(move, hero.health, dragon.health, hero.armor)
+		outputMessage(move, hero, dragon)
 		move++
 
 	}
