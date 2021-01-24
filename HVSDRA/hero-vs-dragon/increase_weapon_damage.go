@@ -3,8 +3,13 @@ package main
 import "fmt"
 
 func increaseWeaponDamage(weapon Weapon) Weapon {
-	increaseDamage := weapon.damage / 10
-	if weapon.name != "sword" {
+	var increaseDamage int
+	if weapon.damage < 10 {
+		increaseDamage = 1
+	} else if weapon.damage >= 10 {
+		increaseDamage = weapon.damage / 10
+	}
+	if weapon.name != "sword" { //sword is a standart weapon
 		if weapon.damage-increaseDamage > 0 {
 			weapon.damage -= increaseDamage
 		} else if weapon.damage-increaseDamage <= 0 {

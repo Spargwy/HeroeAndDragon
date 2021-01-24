@@ -12,7 +12,7 @@ func askAboutnextAction() string {
 	return action
 }
 
-func chooseAction(crossbow, pan, sword Weapon, hero Hero, dragon Dragon, maxHealth int, action string) (Hero, Dragon, Weapon, Weapon) {
+func chooseAction(crossbow, pan, sword Weapon, hero Hero, dragon Dragon, maxHealth int, action string) (Hero, Dragon, Weapon, Weapon, Weapon) {
 
 	var weapon Weapon
 	switch action {
@@ -20,9 +20,8 @@ func chooseAction(crossbow, pan, sword Weapon, hero Hero, dragon Dragon, maxHeal
 		chooseWeapon := chooseWeapon()
 		weapon, crossbow, pan = usingWeapon(crossbow, pan, sword, chooseWeapon)
 		chance := chanceToAttack()
-		chanceToAttack := heroSuccessfullyAttack(weapon.missChance, chance)
-		dragon.health, weapon = heroAttack(hero, dragon, weapon, chanceToAttack)
-
+		successfulAttack := heroSuccessfullyAttack(weapon.missChance, chance)
+		dragon.health, weapon, crossbow, pan, sword = heroAttack(hero, dragon, crossbow, pan, sword, weapon, successfulAttack)
 	case "2":
 		fmt.Println(hero.health, maxHealth)
 		if hero.health < maxHealth {
@@ -39,5 +38,5 @@ func chooseAction(crossbow, pan, sword Weapon, hero Hero, dragon Dragon, maxHeal
 		action = askAboutnextAction()
 		chooseAction(crossbow, pan, sword, hero, dragon, maxHealth, action)
 	}
-	return hero, dragon, crossbow, pan
+	return hero, dragon, crossbow, pan, sword
 }

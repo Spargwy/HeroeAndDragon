@@ -17,8 +17,8 @@ type Dragon struct {
 
 func main() {
 	hero := Hero{
-		maxHealth: 100,
-		health:    40,
+		maxHealth: 1000,
+		health:    1000,
 		damage:    20,
 		armor:     50,
 	}
@@ -32,7 +32,7 @@ func main() {
 		damage:        30,
 		minDamage:     15,
 		missChance:    20,
-		numberOfUsing: 5,
+		numberOfUsing: 100,
 		ItemUsed:      0,
 	}
 	pan := Weapon{
@@ -53,13 +53,13 @@ func main() {
 	move := 1
 	for hero.health > 0 && dragon.health > 0 {
 		action := askAboutnextAction()
-		hero, dragon, crossbow, pan = chooseAction(crossbow, pan, sword, hero, dragon, maxHealth, action)
-		fmt.Println(crossbow, pan)
+		hero, dragon, crossbow, pan, sword = chooseAction(crossbow, pan, sword, hero, dragon, maxHealth, action)
 		if dragon.health > 0 {
 			chance := chanceToAttack()
 			chanceIsGood := dragonSuccessfullyAttack(dragon.missChance, chance)
 			hero.health, hero.armor = dragonAttack(hero, dragon, chanceIsGood)
 		}
+		fmt.Println(crossbow)
 		outputMessage(move, hero.health, dragon.health, hero.armor)
 		move++
 

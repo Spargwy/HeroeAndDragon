@@ -19,7 +19,7 @@ func TestUsingWeapon(t *testing.T) {
 		damage:        10,
 		missChance:    0,
 		numberOfUsing: 10,
-		ItemUsed:      10,
+		ItemUsed:      9,
 	}
 	sword := Weapon{
 		name:          "sword",

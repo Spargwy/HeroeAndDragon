@@ -15,22 +15,31 @@ func heroSuccessfullyAttack(weaponMissChance int, chance int) bool {
 	return successfulAttack
 }
 
-func heroAttack(hero Hero, dragon Dragon, weapon Weapon, successfulAttack bool) (int, Weapon) {
+func heroAttack(hero Hero, dragon Dragon, crossbow, pan, sword, weapon Weapon, successfulAttack bool) (int, Weapon, Weapon, Weapon, Weapon) {
 	damageReduction := heroTiredness(hero)
 	if weapon.minDamage > weapon.damage-damageReduction {
 		hero.damage = weapon.minDamage
 	} else {
 		hero.damage = weapon.damage - damageReduction
 	}
-	if successfulAttack == true {
-		if weapon.damage > 0 {
+	if weapon.damage > 0 {
+		if successfulAttack == true {
 			dragon.health = dragon.health - hero.damage
-			weapon = increaseWeaponDamage(weapon)
-		} else if weapon.damage <= 0 {
-			fmt.Print("WEAPON IS BROKEN")
+			if weapon.name == "crossbow" {
+				crossbow = increaseWeaponDamage(crossbow)
+			} else if weapon.name == "pan" {
+				pan = increaseWeaponDamage(pan)
+			} else if weapon.name == "sword" {
+				sword = increaseWeaponDamage(sword)
+			}
+
 		}
+	} else if weapon.damage <= 0 {
+		fmt.Printf("WEAPON IS BROKEN %s \n", weapon.name)
+		choosedWeapon := chooseWeapon()
+		usingWeapon, _, _ := usingWeapon(crossbow, pan, sword, choosedWeapon)
+		heroAttack(hero, dragon, crossbow, pan, sword, usingWeapon, successfulAttack)
 	}
 
-	fmt.Println("WEAPON : \n", weapon)
-	return dragon.health, weapon
+	return dragon.health, weapon, crossbow, pan, sword
 }

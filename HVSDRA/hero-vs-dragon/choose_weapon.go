@@ -10,9 +10,8 @@ type Weapon struct {
 	numberOfUsing     int
 	ItemUsed          int
 	minChanceToAttack int
+	startDamage       int
 }
-
-//принимать параметры сложности
 
 func chooseWeapon() string {
 	var choosedWeapon string
