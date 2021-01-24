@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -43,7 +42,6 @@ func TestIncreaseWeapondamage(t *testing.T) {
 	}
 
 	wantPanDamage := 9
-	fmt.Println(pan)
 	_, pan, _ = increaseWeaponDamage(pan, crossbow, pan, sword)
 	if pan.damage != wantPanDamage {
 		t.Fatalf("ERROR!!! This wapon damage must be equal %d, but equal %d", wantPanDamage, pan.damage)

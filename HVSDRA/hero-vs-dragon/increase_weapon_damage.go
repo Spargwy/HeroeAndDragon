@@ -13,7 +13,7 @@ func increaseWeaponDamage(weapon, crossbow, pan, sword Weapon) (Weapon, Weapon, 
 		if weapon.damage-increaseDamage > 0 {
 			weapon.damage -= increaseDamage
 		} else if weapon.damage-increaseDamage <= 0 {
-			increaseDamage = (0 - weapon.damage) * -1
+			increaseDamage = weapon.damage
 			weapon.damage = weapon.damage - increaseDamage
 			fmt.Print("This weapon is broke: !", weapon.name)
 		}
@@ -22,7 +22,6 @@ func increaseWeaponDamage(weapon, crossbow, pan, sword Weapon) (Weapon, Weapon, 
 		crossbow.damage = weapon.damage
 	} else if weapon.name == "pan" {
 		pan.damage = weapon.damage
-		fmt.Println(pan)
 	}
 	return crossbow, pan, sword
 }

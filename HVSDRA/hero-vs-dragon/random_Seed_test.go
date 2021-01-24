@@ -8,7 +8,7 @@ import (
 func TestChance(t *testing.T) {
 	chance := chanceToAttack()
 	if chance > -1 && chance < 101 {
-		fmt.Print("OK")
+		fmt.Print("OK\n")
 	} else {
 		t.Fail()
 	}

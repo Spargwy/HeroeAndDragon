@@ -5,7 +5,8 @@ import "fmt"
 func outputMessage(move int, hero Hero, dragon Dragon) {
 
 	fmt.Printf("\n\n#++++++++++++++++++++++++++++++++++++\n")
-	gameComments(hero, dragon)
+	commentsAboutHero, commentsAboutDragon := gameComments(hero, dragon)
+	fmt.Printf("%s\n %s\n", commentsAboutHero, commentsAboutDragon)
 	fmt.Printf("\n#move: %d\n", move)
 	fmt.Printf("#Your Hero's health = %d. \n", hero.health)
 	fmt.Printf("#Dragon's health = %d\n", dragon.health)

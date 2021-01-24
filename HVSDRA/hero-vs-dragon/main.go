@@ -13,6 +13,7 @@ type Dragon struct {
 	health     int
 	damage     int
 	missChance int
+	maxHealth  int
 }
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 		health:     1000,
 		damage:     40,
 		missChance: 30,
+		maxHealth:  1000,
 	}
 	crossbow := Weapon{
 		name:          "crossbow",
