@@ -18,6 +18,7 @@ func chooseWeapon() string {
 	fmt.Print("If you want to use weapon, you can put number of it's weapon\n")
 	fmt.Printf("%s: 1\n", "crossbow")
 	fmt.Printf("%s: 2\n", "pan")
+	fmt.Printf("%s: 3\n", "sword")
 	fmt.Printf("weapon: ")
 
 	fmt.Scan(&choosedWeapon)
@@ -26,28 +27,28 @@ func chooseWeapon() string {
 }
 
 func usingWeapon(choosedWeapon string) Weapon {
-	crossbow := Weapon{}
-	crossbow.name = "crossbow"
-	crossbow.damage = 30
-	crossbow.minDamage = 15
-	crossbow.missChance = 20
-	crossbow.numberOfUsing = 100
-	crossbow.ItemUsed = 0
-
-	pan := Weapon{}
-	pan.name = "pan"
-	pan.damage = 10
-	pan.missChance = 0
-	pan.numberOfUsing = 10
-	pan.ItemUsed = 0
-
-	sword := Weapon{}
-	sword.name = "sword"
-	sword.damage = 30
-	sword.missChance = 20
-	sword.numberOfUsing = 1
-	sword.ItemUsed = 0
-
+	crossbow := Weapon{
+		name:          "crossbow",
+		damage:        30,
+		minDamage:     15,
+		missChance:    30,
+		numberOfUsing: 5,
+		ItemUsed:      0,
+	}
+	pan := Weapon{
+		name:          "pan",
+		damage:        10,
+		missChance:    0,
+		numberOfUsing: 10,
+		ItemUsed:      0,
+	}
+	sword := Weapon{
+		name:          "sword",
+		damage:        30,
+		missChance:    20,
+		numberOfUsing: 1,
+		ItemUsed:      0,
+	}
 	var weapon Weapon
 
 	switch choosedWeapon {
@@ -56,20 +57,26 @@ func usingWeapon(choosedWeapon string) Weapon {
 			weapon = crossbow
 			crossbowItemUsed++
 		} else {
-			fmt.Printf("you have exceeded your weapon usage limit. Standard sword used, %d\n", crossbowItemUsed)
-			weapon = sword
+			fmt.Printf("you have exceeded your weapon usage limit%d. Please choose another weapon\n", crossbowItemUsed)
+			choosedWeapon := chooseWeapon()
+			usingWeapon(choosedWeapon)
 		}
 	case "2":
 		if panItemUsed < pan.numberOfUsing {
 			weapon = pan
 			panItemUsed++
 		} else {
-			fmt.Printf("you have exceeded your weapon usage limit. Standard sword used, %d\n", panItemUsed)
-			weapon = sword
+			fmt.Printf("you have exceeded your weapon usage limit%d. Please, choose another weapon\n", panItemUsed)
+			choosedWeapon := chooseWeapon()
+			usingWeapon(choosedWeapon)
 		}
-	default:
-		fmt.Print("You put the incorrect number, used default weapon - sword\n")
+	case "3":
 		weapon = sword
+
+	default:
+		fmt.Print("You put the incorrect number, please, enter again\n")
+		choosedWeapon := chooseWeapon()
+		usingWeapon(choosedWeapon)
 	}
 	return weapon
 }

@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestDragonChanceToAttack(t *testing.T) {
+func TestDragonSuccessfullyAttack(t *testing.T) {
 	dragonMissChance := 40
 	successfulAttack := dragonSuccessfullyAttack(dragonMissChance, 20)
 	wantSuccessfullyAttack := true
