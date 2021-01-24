@@ -12,15 +12,16 @@ func askAboutnextAction() string {
 	return action
 }
 
-func chooseAction(hero Hero, dragon Dragon, maxHealth int, action string) (Hero, Dragon) {
+func chooseAction(crossbow, pan, sword Weapon, hero Hero, dragon Dragon, maxHealth int, action string) (Hero, Dragon, Weapon, Weapon, Weapon) {
 
+	var weapon Weapon
 	switch action {
 	case "1":
 		chooseWeapon := chooseWeapon()
-		weapon := usingWeapon(chooseWeapon)
+		weapon, crossbow, pan = usingWeapon(crossbow, pan, sword, chooseWeapon)
 		chance := chanceToAttack()
-		chanceToAttack := heroChanceToAttack(weapon.missChance, chance)
-		dragon.health = heroAttack(hero, dragon, weapon, chanceToAttack)
+		successfulAttack := heroSuccessfullyAttack(weapon.missChance, chance)
+		dragon.health, weapon, crossbow, pan, sword = heroAttack(hero, dragon, crossbow, pan, sword, weapon, successfulAttack)
 	case "2":
 		fmt.Println(hero.health, maxHealth)
 		if hero.health < maxHealth {
@@ -28,14 +29,14 @@ func chooseAction(hero Hero, dragon Dragon, maxHealth int, action string) (Hero,
 		} else {
 			fmt.Printf("Sorry, but you cant heal your hero, because HP is max. Please, choose another action\n")
 			action = askAboutnextAction()
-			chooseAction(hero, dragon, maxHealth, action)
+			chooseAction(crossbow, pan, sword, hero, dragon, maxHealth, action)
 
 		}
 
 	default:
 		fmt.Printf("Please, choose the correct action\n")
 		action = askAboutnextAction()
-		chooseAction(hero, dragon, maxHealth, action)
+		chooseAction(crossbow, pan, sword, hero, dragon, maxHealth, action)
 	}
-	return hero, dragon
+	return hero, dragon, crossbow, pan, sword
 }

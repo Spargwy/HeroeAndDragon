@@ -14,10 +14,10 @@ func dragonSuccessfullyAttack(daragonMissChance, chance int) bool {
 	}
 	return successfulAttack
 }
-func dragonAttack(hero Hero, dragon Dragon, successfulAttack bool) int {
+func dragonAttack(hero Hero, dragon Dragon, successfulAttack bool) (int, int) {
 	if successfulAttack == true {
-		hero.health = hero.health - dragon.damage
+		hero.armor, hero.health = damageToArmor(hero, dragon)
 	}
-	return hero.health
+	return hero.health, hero.armor
 
 }

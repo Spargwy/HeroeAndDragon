@@ -3,15 +3,15 @@ package main
 import "fmt"
 
 type Weapon struct {
-	name          string
-	damage        int
-	minDamage     int
-	missChance    int
-	numberOfUsing int
-	ItemUsed      int
+	name              string
+	damage            int
+	minDamage         int
+	missChance        int
+	numberOfUsing     int
+	ItemUsed          int
+	minChanceToAttack int
+	startDamage       int
 }
-
-//принимать параметры сложности
 
 func chooseWeapon() string {
 	var choosedWeapon string
@@ -22,53 +22,33 @@ func chooseWeapon() string {
 	fmt.Printf("weapon: ")
 
 	fmt.Scan(&choosedWeapon)
-
+	if choosedWeapon == "\n" || choosedWeapon == "" {
+		fmt.Printf("Please, enter the correct value\n")
+	}
 	return choosedWeapon
 }
 
-func usingWeapon(choosedWeapon string) Weapon {
-	crossbow := Weapon{
-		name:          "crossbow",
-		damage:        30,
-		minDamage:     15,
-		missChance:    30,
-		numberOfUsing: 5,
-		ItemUsed:      0,
-	}
-	pan := Weapon{
-		name:          "pan",
-		damage:        10,
-		missChance:    0,
-		numberOfUsing: 10,
-		ItemUsed:      0,
-	}
-	sword := Weapon{
-		name:          "sword",
-		damage:        30,
-		missChance:    20,
-		numberOfUsing: 1,
-		ItemUsed:      0,
-	}
+func usingWeapon(crossbow, pan, sword Weapon, choosedWeapon string) (Weapon, Weapon, Weapon) {
 	var weapon Weapon
-
 	switch choosedWeapon {
 	case "1":
-		if crossbowItemUsed < crossbow.numberOfUsing {
+		if crossbow.ItemUsed < crossbow.numberOfUsing {
 			weapon = crossbow
-			crossbowItemUsed++
+			crossbow.ItemUsed++
+
 		} else {
-			fmt.Printf("you have exceeded your weapon usage limit%d. Please choose another weapon\n", crossbowItemUsed)
+			fmt.Printf("you have exceeded your weapon usage limit%d. Please choose another weapon\n", crossbow.ItemUsed)
 			choosedWeapon := chooseWeapon()
-			usingWeapon(choosedWeapon)
+			usingWeapon(crossbow, pan, sword, choosedWeapon)
 		}
 	case "2":
-		if panItemUsed < pan.numberOfUsing {
+		if pan.ItemUsed < pan.numberOfUsing {
 			weapon = pan
-			panItemUsed++
+			pan.ItemUsed++
 		} else {
-			fmt.Printf("you have exceeded your weapon usage limit%d. Please, choose another weapon\n", panItemUsed)
+			fmt.Printf("you have exceeded your weapon usage limit%d. Please, choose another weapon\n", pan.ItemUsed)
 			choosedWeapon := chooseWeapon()
-			usingWeapon(choosedWeapon)
+			usingWeapon(crossbow, pan, sword, choosedWeapon)
 		}
 	case "3":
 		weapon = sword
@@ -76,7 +56,7 @@ func usingWeapon(choosedWeapon string) Weapon {
 	default:
 		fmt.Print("You put the incorrect number, please, enter again\n")
 		choosedWeapon := chooseWeapon()
-		usingWeapon(choosedWeapon)
+		usingWeapon(crossbow, pan, sword, choosedWeapon)
 	}
-	return weapon
+	return weapon, crossbow, pan
 }
