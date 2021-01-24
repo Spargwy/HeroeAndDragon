@@ -25,13 +25,15 @@ func heroAttack(hero Hero, dragon Dragon, crossbow, pan, sword, weapon Weapon, s
 	if weapon.damage > 0 {
 		if successfulAttack == true {
 			dragon.health = dragon.health - hero.damage
-			if weapon.name == "crossbow" {
+
+			crossbow, pan, sword = increaseWeaponDamage(weapon, crossbow, pan, sword)
+			/*if weapon.name == "crossbow" {
 				crossbow = increaseWeaponDamage(crossbow)
 			} else if weapon.name == "pan" {
 				pan = increaseWeaponDamage(pan)
 			} else if weapon.name == "sword" {
 				sword = increaseWeaponDamage(sword)
-			}
+			}*/
 
 		}
 	} else if weapon.damage <= 0 {

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func increaseWeaponDamage(weapon Weapon) Weapon {
+func increaseWeaponDamage(weapon, crossbow, pan, sword Weapon) (Weapon, Weapon, Weapon) {
 	var increaseDamage int
 	if weapon.damage < 10 {
 		increaseDamage = 1
@@ -18,5 +18,11 @@ func increaseWeaponDamage(weapon Weapon) Weapon {
 			fmt.Print("This weapon is broke: !", weapon.name)
 		}
 	}
-	return weapon
+	if weapon.name == "crossbow" {
+		crossbow.damage = weapon.damage
+	} else if weapon.name == "pan" {
+		pan.damage = weapon.damage
+		fmt.Println(pan)
+	}
+	return crossbow, pan, sword
 }

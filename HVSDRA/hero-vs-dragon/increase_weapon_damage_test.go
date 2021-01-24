@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestIncreaseWeapondamage(t *testing.T) {
 	crossbow := Weapon{
@@ -27,25 +30,27 @@ func TestIncreaseWeapondamage(t *testing.T) {
 	}
 
 	wantCrossbowDamage := 27
-	crossbow = increaseWeaponDamage(crossbow)
+	crossbow, _, _ = increaseWeaponDamage(crossbow, crossbow, pan, sword)
 	if crossbow.damage != wantCrossbowDamage {
 		t.Fatalf("ERROR!!! This wapon damage must be equal %d, but equal %d", wantCrossbowDamage, crossbow.damage)
 	}
+
 	crossbow.damage = 7
 	wantCrossbowDamage = 6
-	crossbow = increaseWeaponDamage(crossbow)
+	crossbow, _, _ = increaseWeaponDamage(crossbow, crossbow, pan, sword)
 	if crossbow.damage != wantCrossbowDamage {
 		t.Fatalf("ERROR!!! This wapon damage must be equal %d, but equal %d", wantCrossbowDamage, crossbow.damage)
 	}
 
 	wantPanDamage := 9
-	pan = increaseWeaponDamage(pan)
+	fmt.Println(pan)
+	_, pan, _ = increaseWeaponDamage(pan, crossbow, pan, sword)
 	if pan.damage != wantPanDamage {
 		t.Fatalf("ERROR!!! This wapon damage must be equal %d, but equal %d", wantPanDamage, pan.damage)
 	}
 
 	wantSwordDamage := 30
-	sword = increaseWeaponDamage(sword)
+	_, _, sword = increaseWeaponDamage(sword, crossbow, pan, sword)
 	if sword.damage != wantSwordDamage {
 		t.Fatalf("ERROR!!! This wapon damage must be equal %d, but equal %d", wantSwordDamage, sword.damage)
 	}

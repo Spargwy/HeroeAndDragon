@@ -18,7 +18,7 @@ type Dragon struct {
 func main() {
 	hero := Hero{
 		maxHealth: 1000,
-		health:    100,
+		health:    10000,
 		damage:    20,
 		armor:     50,
 	}
@@ -32,7 +32,7 @@ func main() {
 		damage:        30,
 		minDamage:     0,
 		missChance:    20,
-		numberOfUsing: 100,
+		numberOfUsing: 5,
 		ItemUsed:      0,
 	}
 	pan := Weapon{
